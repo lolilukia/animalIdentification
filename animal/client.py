@@ -1,17 +1,7 @@
 import requests
-import json
-import base64
+
 headers = {'content-type':'application/json'}
-url="https://www.animalidentify.top:5000/record"   #IP和端口号，注意register后要加/
+url="https://www.animalidentify.top:5000/record?name=1"   #IP和端口号，注意register后要加/
 
-img_str = base64.b64encode(f.read())
-
-data = {
-    'user_id':"11",
-    'img':str(img_str)
-}
-print(len(img_str))
-if isinstance(data, bytes):
-    data=str(data, encoding='utf-8')
-r = requests.post(url, data=json.dumps(data),headers=headers)
+r = requests.get(url)
 print(r.text)

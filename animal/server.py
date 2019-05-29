@@ -5,7 +5,10 @@ from animal import AnimalRecognizer
 import database
 import pandas as pd
 import json,time
-import requests
+import urllib.request
+import requests,os,shutil
+
+
 
 app = Flask(__name__)
 
@@ -22,11 +25,27 @@ def recognition():
         file.save(path)
     recognizer = AnimalRecognizer(api_key='IdirM2MKsCLKThwCvS581MFM', secret_key='PSI5UbINOzjNaAg5Ewb5VNlrkUS7FObG')
     animal=recognizer.detect(path)
+    baidupath = '/root/user/baidu/' + str(user_id)
+    isExists = os.path.exists(baidupath)
+    if isExists:
+        shutil.rmtree(baidupath)
+    os.makedirs(baidupath)
+    for i in range(len(animal)):
+        img_url = animal[i]["baike_info"]["image_url"]
+        print(img_url)
+        img = urllib.request.urlopen(img_url)
+        img = img.read()
+        with open(baidupath + '/' + str(i) + '.jpg', 'wb') as f:
+            f.write(img)
+            animal[i]["baike_info"]["image_url"]=baidupath + '/' + str(i) + '.jpg'
+    print(animal)
+
     name=animal[0]['name']
     date=time.strftime('%Y-%m-%d',time.localtime(time.time()))
     database.add_recogniction(user_id, path, name, date)
-    print(json.dumps(animal,ensure_ascii=False))
-    return json.dumps(animal,ensure_ascii=False)
+    json_data={"url":path,"list":animal}
+    print(json.dumps(json_data,ensure_ascii=False))
+    return json.dumps(json_data,ensure_ascii=False)
 
 @app.route("/record",methods=['GET'])
 def record():
