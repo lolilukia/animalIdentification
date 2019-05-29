@@ -14,8 +14,10 @@ app = Flask(__name__)
 
 @app.route("/recognition",methods=['POST'])
 def recognition():
+
     upload_files =request.files.getlist('file')
-    basepath = '/root/user/photo/'
+    basepath = 'static/photo/'
+    web="https://www.animalidentify.top:5000/"
     user_id=request.form.get('name')
 
     #save img
@@ -23,28 +25,48 @@ def recognition():
         filename = secure_filename(file.filename)
         path=basepath+filename
         file.save(path)
+
     recognizer = AnimalRecognizer(api_key='IdirM2MKsCLKThwCvS581MFM', secret_key='PSI5UbINOzjNaAg5Ewb5VNlrkUS7FObG')
     animal=recognizer.detect(path)
-    baidupath = '/root/user/baidu/' + str(user_id)
+    baidupath = 'static/baidu/' + str(user_id)
     isExists = os.path.exists(baidupath)
     if isExists:
         shutil.rmtree(baidupath)
     os.makedirs(baidupath)
     for i in range(len(animal)):
         img_url = animal[i]["baike_info"]["image_url"]
-        print(img_url)
         img = urllib.request.urlopen(img_url)
         img = img.read()
         with open(baidupath + '/' + str(i) + '.jpg', 'wb') as f:
             f.write(img)
             animal[i]["baike_info"]["image_url"]=baidupath + '/' + str(i) + '.jpg'
-    print(animal)
 
     name=animal[0]['name']
     date=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-    database.add_recogniction(user_id, path, name, date)
+    database.add_recogniction(user_id, web+path, name, date)
     json_data={"url":path,"list":animal}
-    print(json.dumps(json_data,ensure_ascii=False))
+    return json.dumps(json_data,ensure_ascii=False)
+
+@app.route("/recognition_agin",methods=['GET'])
+def recognition_agin():
+    img =request.args.get('url')
+    user_id = request.args.get('name')
+    recognizer = AnimalRecognizer(api_key='IdirM2MKsCLKThwCvS581MFM', secret_key='PSI5UbINOzjNaAg5Ewb5VNlrkUS7FObG')
+    animal=recognizer.detect(img)
+    baidupath = 'static/baidu/' + str(user_id)
+    isExists = os.path.exists(baidupath)
+    if isExists:
+        shutil.rmtree(baidupath)
+    os.makedirs(baidupath)
+    for i in range(len(animal)):
+        img_url = animal[i]["baike_info"]["image_url"]
+        img = urllib.request.urlopen(img_url)
+        img = img.read()
+        with open(baidupath + '/' + str(i) + '.jpg', 'wb') as f:
+            f.write(img)
+            animal[i]["baike_info"]["image_url"]=baidupath + '/' + str(i) + '.jpg'
+
+    json_data={"url":path,"list":animal}
     return json.dumps(json_data,ensure_ascii=False)
 
 @app.route("/record",methods=['GET'])
@@ -77,7 +99,7 @@ def record():
         datas = datas.reset_index()
         datas = datas.drop('date', 1)
         datas = datas.drop('index', 1)
-        json_data = datas.to_json(orient='columns')
+        json_data = datas.to_json(orient='table')
         json_data = json.loads(json_data)
         date = str(data[0][0]).replace(', ', '-')
         date = date[1:len(date) - 1]
@@ -85,7 +107,6 @@ def record():
         json_list.append(json_data)
 
     return json.dumps(json_list,ensure_ascii=False)
-
 
 @app.route("/record_kind",methods=['GET'])
 def record_kind():
@@ -109,16 +130,17 @@ def record_kind():
     data = data.reset_index()
     data = data.drop('date', 1)
     data = data.drop('index', 1)
-    json_data = data.to_json(orient='columns')
+    json_data = data.to_json(orient='table')
     json_data = json.loads(json_data)
+    print(json_data)
 
-    return json_data
+    return json.dumps(json_data['data'])
 
 @app.route("/home",methods=['GET'])
 def home():
-    user_id = request.args.get('name')
 
-    results = database.search_recordBycount(user_id)
+
+    results = database.search_recordBycount()
     animals = []
     urls = []
     counts = []
@@ -132,10 +154,9 @@ def home():
          "url": urls,
          "count": counts})
 
-    json_data = data.to_json(orient='columns')
+    json_data = data.to_json(orient='table')
     json_data = json.loads(json_data)
-
-    return json_data
+    return json.dumps(json_data['data'])
 
 @app.route("/session",methods=['GET'])
 def session():
@@ -145,6 +166,7 @@ def session():
     url='https://api.weixin.qq.com/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&js_code=' + code + '&grant_type=authorization_code'
     r = requests.get(url)
     return r.text
+
 
 
 if __name__ == "__main__":

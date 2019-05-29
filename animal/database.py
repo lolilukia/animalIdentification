@@ -15,7 +15,6 @@ def add_recogniction(user_id,url,name,time):
 
     sql = "INSERT INTO RECOGNITION( USER_ID, URL, ANIMAL, DATETIME) VALUES ({},{},{},{});".\
         format(repr(user_id),repr(url),repr(name),repr(time))
-    print(sql)
 
     try:
         cursor.execute(sql)
@@ -67,11 +66,10 @@ def search_recordBykind(user_id):
         db.rollback()
     close_connect(db)
 
-def search_recordBycount(user_id):
+def search_recordBycount():
     db=get_connect()
     cursor = db.cursor()
-    sql = "SELECT ANIMAL,MAX(URL),COUNT(ANIMAL) FROM RECOGNITION WHERE USER_ID=" + repr(user_id) + " " \
-          "GROUP BY ANIMAL ORDER BY ANIMAL"
+    sql = "SELECT ANIMAL,MAX(URL),COUNT(ANIMAL) FROM RECOGNITION GROUP BY ANIMAL ORDER BY ANIMAL DESC"
 
     try:
         cursor.execute(sql)
