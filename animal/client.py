@@ -2,8 +2,8 @@ import requests
 import json
 import base64
 headers = {'content-type':'application/json'}
-url="http://www.animalidentify.top:8888/recognition"   #IP和端口号，注意register后要加/
-f = open("test1.jpg", 'rb')
+url="https://www.animalidentify.top:5000/record"   #IP和端口号，注意register后要加/
+
 img_str = base64.b64encode(f.read())
 
 data = {

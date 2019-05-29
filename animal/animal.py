@@ -39,7 +39,7 @@ class AnimalRecognizer(object):
   def detect(self, img_path):
       f = open(img_path, 'rb')
       img_str = base64.b64encode(f.read())
-      params = {'image': img_str, 'top_num': 6,'baike_num':6}
+      params = {'image': img_str, 'top_num': 3,'baike_num':3}
       rp_json = self.get_result(params)
 
       return rp_json['result']
