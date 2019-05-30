@@ -92,7 +92,8 @@ def recognition():
 def detail():
     name = request.args.get('name')
     result=database.search_des(name)
-    des=result[0][0]
+    print(result)
+    des=result[0]
     json_data={"des":des}
     return json.dumps(json_data,ensure_ascii=False)
 
