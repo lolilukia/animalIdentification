@@ -19,8 +19,9 @@ cursor.execute(sql)
 cursor.execute("DROP TABLE IF EXISTS RECORD")
 
 sql = """CREATE TABLE RECORD (
-         USER_ID  CHAR(100) NOT NULL,
-         NAME CHAR(20),  
+         ANIMAL  CHAR(100) character set utf8 NOT NULL,
+         DES TEXT character set utf8,
+         URL CHAR(100) character set utf8,
          NUM INT)"""
 
 cursor.execute(sql)

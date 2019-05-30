@@ -1,4 +1,5 @@
-
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
 from flask import Flask,request, redirect, url_for
 from werkzeug.utils import secure_filename
 from animal import AnimalRecognizer
@@ -7,7 +8,7 @@ import pandas as pd
 import json,time
 import urllib.request
 import requests,os,shutil
-
+import re
 
 
 app = Flask(__name__)
@@ -28,45 +29,71 @@ def recognition():
 
     recognizer = AnimalRecognizer(api_key='IdirM2MKsCLKThwCvS581MFM', secret_key='PSI5UbINOzjNaAg5Ewb5VNlrkUS7FObG')
     animal=recognizer.detect(path)
-    baidupath = 'static/baidu/' + str(user_id)
-    isExists = os.path.exists(baidupath)
-    if isExists:
-        shutil.rmtree(baidupath)
-    os.makedirs(baidupath)
-    for i in range(len(animal)):
-        img_url = animal[i]["baike_info"]["image_url"]
-        img = urllib.request.urlopen(img_url)
-        img = img.read()
-        with open(baidupath + '/' + str(i) + '.jpg', 'wb') as f:
-            f.write(img)
-            animal[i]["baike_info"]["image_url"]=baidupath + '/' + str(i) + '.jpg'
+    print(animal)
+    name = animal[0]['name']
+    if(name!="非动物"):
+        baidupath = 'static/baidu/' + str(user_id)
+        homepath='static/baike/'
+        isExists = os.path.exists(baidupath)
+        if isExists:
+            shutil.rmtree(baidupath)
+        os.makedirs(baidupath)
 
-    name=animal[0]['name']
-    date=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-    database.add_recogniction(user_id, web+path, name, date)
-    json_data={"url":path,"list":animal}
+        for i in range(len(animal)):
+            urlname=animal[i]['name']
+
+            if (animal[i]["baike_info"].__contains__('image_url')):
+                img_url = animal[i]["baike_info"]["image_url"]
+                img = urllib.request.urlopen(img_url)
+                img = img.read()
+                with open(baidupath + '/' + urlname + '.jpg', 'wb') as f:
+                    f.write(img)
+            else:
+                search_name = animal[i]['name']
+                url = r'http://image.baidu.com/search/index?tn=baiduimage&ps=1&ct=201326592&lm=-1&cl=2&nc=1&ie=utf-8&word=' \
+                      + str(search_name)
+                dirpath = baidupath+'/'
+                html = requests.get(url).text
+                urls = re.findall(r'"objURL":"(.*?)"', html)
+                url = urls[0]
+                try:
+                    res = requests.get(url)
+                    if str(res.status_code)[0] == "4":
+                        print("sucess download from baidu：", url)
+                        continue
+                except Exception as e:
+                    print("fail download from baidu：", url)
+                filename = os.path.join(dirpath, urlname + ".jpg")
+                img=res.content
+                with open(filename, 'wb') as f:
+                    f.write(img)
+
+            if(i==0):
+                with open(homepath + name + '.jpg', 'wb') as f:
+                    f.write(img)
+
+            animal[i]["baike_info"]["image_url"] = web + baidupath + '/' + urlname + '.jpg'
+
+        des=animal[0]['baike_info']['description']
+        date=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+        database.add_recogniction(user_id, web+path, name, date)
+        records=database.search_recordByanimal(name)
+        if(len(records)==0):
+            database.add_record(name,des,web + homepath + name + '.jpg',1)
+        else:
+            database.update_record(name,str(records[0][0]))
+
+        json_data={"url":web+path,"list":animal,"result":"1"}
+    else:
+        json_data={"url":web+path,"list":animal,"result":"0"}
     return json.dumps(json_data,ensure_ascii=False)
 
-@app.route("/recognition_agin",methods=['GET'])
-def recognition_agin():
-    img =request.args.get('url')
-    user_id = request.args.get('name')
-    recognizer = AnimalRecognizer(api_key='IdirM2MKsCLKThwCvS581MFM', secret_key='PSI5UbINOzjNaAg5Ewb5VNlrkUS7FObG')
-    animal=recognizer.detect(img)
-    baidupath = 'static/baidu/' + str(user_id)
-    isExists = os.path.exists(baidupath)
-    if isExists:
-        shutil.rmtree(baidupath)
-    os.makedirs(baidupath)
-    for i in range(len(animal)):
-        img_url = animal[i]["baike_info"]["image_url"]
-        img = urllib.request.urlopen(img_url)
-        img = img.read()
-        with open(baidupath + '/' + str(i) + '.jpg', 'wb') as f:
-            f.write(img)
-            animal[i]["baike_info"]["image_url"]=baidupath + '/' + str(i) + '.jpg'
-
-    json_data={"url":path,"list":animal}
+@app.route("/detail",methods=['GET'])
+def detail():
+    name = request.args.get('name')
+    result=database.search_des(name)
+    des=result[0][0]
+    json_data={"des":des}
     return json.dumps(json_data,ensure_ascii=False)
 
 @app.route("/record",methods=['GET'])
