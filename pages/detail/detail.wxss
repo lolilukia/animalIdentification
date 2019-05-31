@@ -1,0 +1,42 @@
+.detailContain{
+  background: #efefef;
+}
+.headImg{
+  width: 100%;
+  margin-top: 10rpx;
+}
+.headImage{
+  width: 80%;
+  margin: 0 auto;
+  height: 400rpx;
+  overflow: hidden;
+}
+.desContain{
+  margin-top: 30rpx;
+  background: #fff;
+}
+.desPanel, .desContent{
+  background: #fff;
+  width: 80%;
+  margin: 0 auto;
+}
+.desContain{
+  padding-top: 30rpx;
+}
+.desTitleContain{
+  text-align: center;
+}
+.desTitle{
+  color: #666;
+  font-weight: 600;
+}
+.desText{
+  font-size: 90%;
+  color: #999;
+  margin-top: 10rpx;
+}
+.sep{
+  height: 50rpx;
+  width: 100%;
+  margin: 0 auto;
+}

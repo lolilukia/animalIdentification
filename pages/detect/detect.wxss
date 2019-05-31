@@ -1,0 +1,103 @@
+Page{
+  background: url('https://www.animalidentify.top:5000/static/test2.jpg') repeat;
+  background-size:100% 100%;
+}
+.detectContain{
+
+}
+.originalContain{
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 50rpx;
+}
+.original_text{
+  color: #666;
+  text-align: center;
+  font-weight: 600;
+  font-size: 120%;
+}
+.original{
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 1000rpx;
+  overflow: hidden;
+  position: relative;
+}
+.flex-wrp{
+  display: flex;
+  flex-direction:row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.original_image{
+  width: 400rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.slideContain{
+  width: 100%;
+  height: 650rpx;
+  background: #fff;
+  overflow-x: scroll;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 0 30rpx 0 30rpx;
+  display: flex;
+  flex-direction:row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.slideImg{
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 200rpx;
+  overflow: hidden;
+  position: relative;
+  margin: 80rpx 20rpx 0 20rpx;
+}
+.possible{
+  position: relative;
+}
+.original_img{
+  width: 400rpx;
+  height: 400rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.original_image{
+  width: 400rpx;
+  height: 400rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.name{
+  width: 400rpx;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 20rpx;
+  color: #3498db;
+  font-weight: 600;
+}
+.accuracy{
+  width: 400rpx;
+  text-align: center;
+  position: absolute;
+  top: 35rpx;
+  left: 20rpx;
+  color: #aaa;
+}
+.possible_text{
+  color: #666;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+  position: absolute;
+  left: 30rpx;
+  bottom: 650rpx;
+}

@@ -1,0 +1,16 @@
+<view class="listContain">
+  <view class="listTitle">
+    <text class="listContent">收集了<text class="listBlue">{{listText}}</text>种生灵
+    </text>
+  </view>
+  <view class="imgContain flex-wrp">
+      <block wx:for="{{resList}}" wx:key="num" wx:for-item="item">
+        <view class="moduleCon">
+          <view class="imgPanel">
+            <image src="{{item.url}}" class="listImg"/>
+          </view>
+          <view class="tag">{{item.animal}}</view>
+        </view>
+      </block>
+    </view>
+</view>

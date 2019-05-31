@@ -1,0 +1,16 @@
+<view class="detailContain">
+  <view class="headImage">
+    <image mode="widthFix" src="{{headImg}}" class="headImg"/>
+  </view>
+  <view class="desContain">
+    <view class="desPanel">
+      <view class="desTitleContain">
+        <text class="desTitle">{{title}}</text>
+      </view>
+      <image src="../../images/sep.png" class="sep"/>
+      <view class="desContent">
+        <text class="desText">{{des}}</text>
+      </view>
+    </view>
+  </view>
+</view>

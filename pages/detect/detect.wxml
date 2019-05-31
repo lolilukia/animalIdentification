@@ -1,0 +1,20 @@
+<view class="detectContain">
+  <view class="originalContain">
+    <text class="original_text">原始图片</text>
+    <view class="original">
+      <image src="{{originalImage}}" class="original_img"/>
+    </view>
+  </view>
+  <text class="possible_text">可能的结果</text>
+  <view class="slideContain">
+    <block wx:for="{{resList}}" wx:key="name" wx:for-item="item">
+      <view class="possible">
+        <view class="slideImg">
+          <image src="{{item.baike_info.image_url}}" class="original_image" bindtap="turnDetail" data-imgurl="{{item.baike_info.image_url}}" data-kind="{{item.name}}" data-des="{{item.baike_info.description}}"/>
+        </view>
+          <text class="name">{{item.name}}</text>
+          <text class="accuracy">{{item.score}}</text>
+      </view>
+    </block>
+  </view>
+</view>

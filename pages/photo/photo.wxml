@@ -1,0 +1,36 @@
+<view class="container">
+  <!--<view class="tips">
+    <image src="../../images/tips.png" class="notebook"/>
+    <block wx:for="{{tip_text}}" wx:key="unique" wx:for-item="item">
+      <view class="tips_items">
+        <image src="../../images/tip.png" class="tips_icon"/>
+        <text class="tips_text">{{item}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="valid">
+    <image src="../../images/take_photo.png" class="method"/>
+    <image src="../../images/and.png" class="method"/>
+    <image src="../../images/album.png" class="method"/>
+    <image src="../../images/valid.png" class="correct"/>
+  </view>
+  <button wx:if="{{canIUse}}" class="AuthorBtn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+    <text class="reg">授权登录</text>
+  </button>
+  <button class="cameraBtn" bindtap="takePhoto">
+    <text class="reg">点击识别</text>
+  </button>
+  <view class="example">
+    <text class="eg_title">示例图片</text>
+    <image src="../../images/cat.jpg" class="eg_img"/>
+  </view>-->
+  <view class="back">
+    <image mode="widthFix" src="../../images/bg.jpeg" class="backImg"/>
+    <button wx:if="{{canIUse}}" class="AuthorBtn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+      <text class="reg">授权登录</text>
+    </button>
+    <button class="cameraBtn" bindtap="takePhoto">
+      <text class="reg">点击识别</text>
+    </button>
+  </view>
+</view>

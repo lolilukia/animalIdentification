@@ -1,21 +1,104 @@
-/**index.wxss**/
-.userinfo {
+Page{
+  background: #efefef;
+}
+.swiper-container{
+  position: relative;
+  width: 100%;
+}
+swiper {
+    width: 100%;
+    height: 420rpx;
+}
+swiper-item .img {
+    width: 100%;
+    height: 420rpx;
+}
+.recommenContain{
+  margin-top: 30rpx;
+  width: 100%;
+}
+.recommenStar{
+  width: 30rpx;
+  height: 30rpx;
+  margin: 12rpx 10rpx 0 30rpx;
+}
+.recommenList{
+  width: 100%;
+  padding-top: 10rpx;
+  background: #fff;
+}
+.recommenTitle{
+  font-size: 80%;
+  color: #666;
+}
+.recommenIcon{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 180rpx;
+  left: 350rpx;
+}
+.recommenItem{
+  width: 100%;
+  height: 235rpx;
+  background: #fff;
+  position: relative;
+  margin-bottom: 15rpx;
+}
+.imgContain{
+  position: absolute;
+  top: 15rpx;
+  left: 70rpx;
+  width: 200rpx;
+  height: 200rpx;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.recommenImg{
+  width: 100%;        
 }
-
-.userinfo-nickname {
+.recommenName{
+  position: absolute;
+  top: 80rpx;
+  left: 350rpx;
+  font-weight: 500;
+  color: #666;
+}
+.recommenSearch{
+   position: absolute;
+  top: 173rpx;
+  left: 390rpx;
+  font-size: 90%;
   color: #aaa;
 }
-
-.usermotto {
-  margin-top: 200px;
+.recommenIndex{
+  position: absolute;
+  top: 15rpx;
+  left: 350rpx;
+  color: #3498db;
+  font-weight: 600;
+  font-size: 120%;
+}
+.recommenTurn{
+  position: absolute;
+  top: 180rpx;
+  right: 40rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+.recommenMore{
+  position: absolute;
+  top: 172rpx;
+  right: 80rpx;
+  color: #666;
+  font-size: 80%;
+}
+.top{
+  width: 85rpx;
+  height: 85rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 80rpx;
 }

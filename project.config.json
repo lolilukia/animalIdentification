@@ -12,7 +12,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.0",
+	"libVersion": "2.7.1",
 	"appid": "wxd4e0e047d21a49a6",
 	"projectname": "animal",
 	"debugOptions": {

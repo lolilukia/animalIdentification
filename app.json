@@ -1,12 +1,42 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/mine/mine",
+    "pages/list/list",
+    "pages/photo/photo",
+    "pages/detect/detect",
+    "pages/detail/detail",
     "pages/logs/logs"
   ],
   "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#3498db",
+    "navigationBarTitleText": "生灵",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar":{
+    "color": "#ababab",
+    "selectedColor": "#3498db",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "万物",
+        "iconPath": "images/claw.png",
+        "selectedIconPath": "images/claw_selected.png"
+      },
+      {
+        "pagePath": "pages/photo/photo",
+        "text": "识别",
+        "iconPath": "images/camera.png",
+        "selectedIconPath": "images/camera_selected.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user_selected.png"
+      }
+    ]
   }
 }

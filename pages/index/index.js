@@ -1,54 +1,78 @@
-//index.js
-//获取应用实例
-const app = getApp()
-
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    swiperCurrent: 0,
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    duration: 800,
+    circular: true,
+    imgUrls: [
+      '../../images/bar0.jpg',
+      '../../images/bar1.jpg',
+      '../../images/bar2.jpg'
+    ],
+    rate: [
+      '../../images/no1.jpeg',
+      '../../images/no2.jpeg',
+      '../../images/no3.jpeg'
+    ],
+    recommens: []
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  //轮播图的切换事件
+  swiperChange: function (e) {
+    this.setData({
+      swiperCurrent: e.detail.current
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+  //点击指示点切换
+  chuangEvent: function (e) {
+    this.setData({
+      swiperCurrent: e.currentTarget.id
+    })
+  },
+  onShow: function(){
+    var that = this;
+    wx.request({
+      url: 'https://www.animalidentify.top:5000/home',
+      method: 'GET',
+      success: function (result) {
+        var json = result.data;
+        if (typeof json != 'object') {
+          if (json != null) {
+            json = json.replace("\ufeff", "")
+            var ob = JSON.parse(json)
+            that.setData({
+              recommens: ob
+            });
+          }
+        } 
+        else {
+          that.setData({
+            recommens: json
+          });
+        }
+        /*var temp = result.data;
+        that.setData({
+          recommens: temp
+        });*/
+      }
+    });
+  },
+  turnDetail: function(event){
+    var that = this;
+    wx.request({
+      url: 'https://www.animalidentify.top:5000/detail',
+      method: 'GET',
+      data: {
+        name: event.target.dataset.name
+      },
+      success: function (result) {
+        //console.log(result.data);
+        var temp = result.data.des[0];
+        wx.navigateTo({
+          url: '../detail/detail?des=' + temp + '&url=' + event.target.dataset.url + '&name=' + event.target.dataset.name,
         })
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    });
   }
 })

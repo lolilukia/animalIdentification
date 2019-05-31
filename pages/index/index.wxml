@@ -1,13 +1,30 @@
-<!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view class="swiper-container">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{duration}}" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
+      <block wx:for="{{imgUrls}}" wx:key="unique" wx:for-item="item">
+        <swiper-item>
+          <image src="{{item}}" class="img" bindtap="swipclick" />
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="recommenContain">
+    <view class="recommenList">
+      <image src="../../images/star.png" class="recommenStar"/><text class="recommenTitle">热门生灵</text>
+    </view>
+    <block wx:for="{{recommens}}" wx:key="num" wx:for-item="item">
+      <view class="recommenItem">
+        <view class="imgContain">
+          <image mode="widthFix" src="{{item.url}}" class="recommenImg"/>
+        </view>
+        <image wx:if="{{item.index < 3}}" src="{{rate[item.index]}}" class="top"/>
+        <text class="recommenIndex">No.{{item.index + 1}}</text>
+        <text class="recommenName">{{item.animal}}</text>
+        <image src="../../images/search.png" class="recommenIcon"/>
+        <text class="recommenSearch">{{item.count}}</text>
+        <image src="../../images/right.png" class="recommenTurn"/>
+        <text bindtap="turnDetail" data-name="{{item.animal}}" data-url="{{item.url}}" class="recommenMore">查看详情</text>
+      </view>
+    </block>
   </view>
 </view>

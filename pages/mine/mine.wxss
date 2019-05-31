@@ -1,0 +1,99 @@
+page{
+  background: #efefef;
+  /*background: url('https://www.animalidentify.top:5000/static/test2.jpg') repeat;
+  background-size:100% 100%;*/
+}
+.flex-wrp{
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.userinfo{
+  height: 200rpx;
+  width: 100%;
+  padding: 0 40rpx;
+  background: #fff;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.getinfo{
+  font-size: 40rpx;
+}
+.avatar {
+  max-width: 130rpx;
+  max-height: 130rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.nick{
+  width: 80%;
+}
+.nickname{
+  margin: 0 20rpx;
+}
+.rest_time{
+  padding: 0 40rpx;
+  position: relative;
+  background: #fff;
+  height: 100rpx;
+  align-items: center;
+  border-bottom: 1px #eee solid;
+}
+.info{
+  font-size: 80%;
+  color: #666;
+  position: absolute;
+  top: 85rpx;
+  right: 100rpx;
+}
+.arrow{
+  width: 45rpx;
+  height: 45rpx;
+  position: absolute;
+  right: 50rpx;
+  top: 85rpx;
+}
+.timeline{
+  margin-top: 20rpx;
+  background-color: #fff;
+  /*background: url('https://www.animalidentify.top:5000/static/test2.jpg') repeat;
+  background-size:100%;*/
+}
+.timeinfo{
+  padding: 30rpx;
+  font-size: 80%;
+  font-weight: 500;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+.timeimg{
+  width: 200rpx;
+  height: 200rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.tag{
+  width: 100rpx;
+  height: 40rpx;
+  background: #3498db;
+  color: #fff;
+  font-weight: 600;
+  position: absolute;
+  bottom: 20rpx;
+  left: 0;
+  text-align: center;
+  border: 1px solid #fff;
+  font-size: 90%;
+  overflow: hidden;
+}
+.imgContain{
+  width: 200rpx;
+  height: 200rpx;
+  margin-top: 10rpx;
+  position: relative;
+}
+
+

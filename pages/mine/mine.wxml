@@ -1,0 +1,29 @@
+<view class="mine">
+  <view class="flex-wrp userinfo">
+    <view class="flex-item">
+      <view class="avatar">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+    </view>
+    <view class="flex-item nick">
+      <open-data class="nickname" type="userNickName"></open-data>
+    </view>
+    <view class="flex-item" bindtap='modifyInfo' bindtap="turnList">
+      <text class="info">{{mine_info}}</text>
+      <image src="../../images/arrow.png" class="arrow"></image>
+    </view>
+  </view>
+  <block wx:for="{{records}}" wx:key="date" wx:for-item="item">
+    <view class="timeinfo">
+    <text class="time">{{item.date}}</text>
+      <view class="flex-wrp timeline">
+        <block wx:for="{{item.data}}" wx:key="index" wx:for-item="ele">
+          <view class="imgContain">
+            <image src="{{ele.url}}" class="timeimg" data-url="{{ele.url}}" data-animal="{{ele.animal}}" bindtap="turnDetail"/>
+            <view class="tag">{{ele.animal}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>

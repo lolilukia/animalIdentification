@@ -1,0 +1,102 @@
+Page{
+  overflow: scroll;
+}
+/*.valid{
+  margin-top: 10rpx;
+}
+.method{
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 30rpx;
+}
+.correct{
+  width: 50rpx;
+  height: 50rpx;
+}
+.tips{
+  width: 80%;
+  margin: 30rpx;
+  height: 300rpx;
+  border: solid #ddd 2px;
+  border-radius: 20rpx;
+  position: relative;
+}
+.notebook{
+  height: 100rpx;
+  width: 100rpx;
+  position: absolute;
+  top: -30rpx;
+  left: -50rpx;
+}
+.tips_items{
+  width: 80%;
+  color: #aaa;
+  font-size: 80%;
+  margin: 20rpx 50rpx;
+}
+.tips_icon{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 30rpx;
+}
+.tips_text{
+  margin-bottom: 10rpx;
+}
+.example{
+  margin-top: 30rpx;
+  width: 80%;
+}
+.eg_title{
+  font-weight: 600;
+}
+.eg_img{
+  width: 100%;
+}
+
+.cameraBtn, .AuthorBtn{
+  margin: 10rpx;
+  width: 50%;
+  color: #fff;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 30rpx;
+}
+.cameraBtn{
+  background: #3498db;
+  float: right;
+}
+.AuthorBtn{
+  background: #aaa;
+  float: left;
+}
+*/
+.back{
+  width: 80%;
+}
+.backImg{
+  width: 100%;
+}
+.cameraBtn, .AuthorBtn{
+  margin: 10rpx;
+  width: 300rpx;
+  color: #fff;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 30rpx;
+}
+.cameraBtn{
+  background: #3498db;
+  position: absolute;
+  left: 220rpx;
+  top: 910rpx;
+}
+.AuthorBtn{
+  background: #aaa;
+  position: absolute;
+  left: 220rpx;
+  top: 770rpx;
+}
